@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suhejb Musliu — Full-Stack Software Engineer</title>
+  <meta name="description" content="Suhejb Musliu — Full-Stack Software Engineer building production-ready web applications with Next.js, React, TypeScript, Node.js and PostgreSQL. Creator of Zendo.mk, a multi-vendor e-commerce marketplace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23111311'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23baf7c4' text-anchor='middle'>S</text></svg>" />
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ======================= NAV ======================= -->
+  <header class="nav-wrap" id="navWrap">
+    <nav class="nav">
+      <a href="#top" class="nav-logo" aria-label="Home">
+        <span class="nav-monogram">SM</span>
+      </a>
+      <div class="nav-divider"></div>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#zendo">Zendo</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+      </div>
+      <div class="nav-divider"></div>
+      <div class="nav-icons">
+        <a href="https://www.linkedin.com/in/suhejb-musliu-8875691a8" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+        <a href="mailto:suhejbmusliu69@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+        </a>
+      </div>
+      <a href="mailto:suhejbmusliu69@gmail.com?subject=Project%20inquiry" class="btn btn-dark nav-cta">Book a Call</a>
+    </nav>
+  </header>
+
+  <main class="page" id="top">
+
+    <!-- ======================= HERO ======================= -->
+    <section class="hero">
+      <div class="hero-avatar reveal">
+        <div class="avatar-ring">
+          <div class="avatar-core">SM</div>
+        </div>
+        <span class="avatar-status" title="Available"></span>
+      </div>
+      <h1 class="hero-title reveal">
+        Hey, I&rsquo;m Suhejb Musliu.<br />
+        Full-Stack <span class="hero-spark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg>
+        </span> Engineer
+      </h1>
+      <p class="hero-sub reveal">
+        I build production-ready web applications with Next.js, React, TypeScript, Node.js and PostgreSQL —
+        from scalable e-commerce systems and REST APIs to admin dashboards and payout engines.
+        Builder of <a href="https://zendo.mk" target="_blank" rel="noopener">Zendo.mk</a>.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="mailto:suhejbmusliu69@gmail.com?subject=Project%20inquiry" class="btn btn-dark">Book a Call</a>
+        <span class="badge-available"><span class="pulse-dot"></span>Available for new project</span>
+      </div>
+    </section>
+
+    <!-- ======================= TECH MARQUEE ======================= -->
+    <section class="tech-marquee-section reveal" aria-label="Technologies I work with">
+      <div class="marquee-mask">
+        <div class="marquee-track" id="techTrack"><!-- populated by script.js, duplicated for the loop --></div>
+      </div>
+    </section>
+
+    <!-- ======================= SHOWCASE STRIP ======================= -->
+    <section class="showcase" aria-label="Project previews">
+      <div class="showcase-mask">
+        <div class="showcase-track" id="showcaseTrack"><!-- populated by script.js --></div>
+      </div>
+      <p class="showcase-hint reveal">— a few things I&rsquo;ve shipped, keep scrolling —</p>
+    </section>
+
+    <!-- ======================= ZENDO CASE STUDY ======================= -->
+    <section class="section zendo" id="zendo">
+      <div class="section-head reveal">
+        <span class="section-tag">Featured case study</span>
+        <h2>Zendo<span class="accent-dot">.</span>mk</h2>
+        <p class="section-lede">A production multi-vendor e-commerce marketplace — designed, built and launched end-to-end.</p>
+      </div>
+
+      <div class="zendo-hero reveal">
+        <div class="device-frame device-frame-lg zendo-demo-frame">
+          <div class="demo-chrome">
+            <span class="demo-dots"><i></i><i></i><i></i></span>
+            <span class="demo-url" id="demoUrl">zendo.mk/admin</span>
+            <nav class="demo-tabs" id="demoMode" aria-label="Demo mode">
+              <button type="button" data-mode="console" class="active">Admin console</button>
+              <button type="button" data-mode="live">Live storefront</button>
+            </nav>
+          </div>
+          <div class="device-screen demo-screen" id="demoScreen">
+            <div class="admin-shell" id="adminShell">
+              <aside class="admin-side" id="adminSide"></aside>
+              <div class="admin-main">
+                <header class="admin-topbar" id="adminTopbar"></header>
+                <div class="admin-page" id="adminPage"></div>
+              </div>
+            </div>
+            <section class="demo-view-live" id="view-live" hidden></section>
+            <div class="demo-toast" id="demoToast" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+        <p class="demo-caption">↑ The storefront is live at zendo.mk — but the real engineering lives behind the login.
+          This is a working simulation of the <strong>admin console</strong> I built: orders streaming in live,
+          per-vendor commission rates, supplier balances, payout runs and role-based access.
+          Ship an order in <strong>Orders</strong>, pay the vendor in <strong>Payouts</strong>,
+          then switch the role to <strong>Vendor</strong> and watch RBAC scope everything down.</p>
+      </div>
+
+      <div class="zendo-body">
+        <div class="zendo-copy reveal">
+          <p>
+            <strong>Zendo.mk</strong> is a multi-vendor marketplace running in production for the North Macedonian
+            market. I built the entire platform as the sole full-stack developer — from the first Prisma schema
+            to the deployed product — covering the customer storefront, the vendor &amp; admin dashboards, and
+            the financial engine underneath it all.
+          </p>
+          <p>
+            Customers browse a full product catalog, add to cart, check out and track orders. Each seller company
+            gets its own role-gated dashboard to manage products, orders, workflows and reporting, while the
+            platform admin oversees everything — users, companies, permissions, commissions and payouts.
+          </p>
+          <p>
+            The hardest part wasn&rsquo;t the UI — it was the money. I designed the commission calculation, supplier
+            balances, unpaid-order tracking and payout history logic so that every denar flowing through the
+            marketplace is accounted for. The console above simulates exactly that engine — watch orders stream
+            in, deliver one, then run the payout and follow every denar.
+          </p>
+          <a href="https://zendo.mk" target="_blank" rel="noopener" class="btn btn-dark">Visit zendo.mk
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+
+        <div class="zendo-facts reveal">
+          <div class="fact"><span class="fact-num">3</span><span class="fact-label">user roles — customer, vendor, admin</span></div>
+          <div class="fact"><span class="fact-num">7+</span><span class="fact-label">core data models in PostgreSQL / Prisma</span></div>
+          <div class="fact"><span class="fact-num">1</span><span class="fact-label">developer — designed, built &amp; shipped solo</span></div>
+          <div class="fact"><span class="fact-num">Live</span><span class="fact-label">in production on Vercel + Supabase</span></div>
+        </div>
+      </div>
+
+      <div class="zendo-features">
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16l-1.5 12.5a2 2 0 0 1-2 1.5h-9a2 2 0 0 1-2-1.5L4 7z"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <h3>Storefront &amp; checkout</h3>
+          <p>Product catalog, cart, checkout and order tracking — the complete customer-facing e-commerce flow.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+          </div>
+          <h3>Vendor &amp; admin dashboards</h3>
+          <p>Role-based dashboards for product and order management, company workflows, reporting screens and platform administration.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.6" fill="currentColor"/></svg>
+          </div>
+          <h3>Auth &amp; RBAC</h3>
+          <p>Authentication, authorization and protected routes with Clerk, Supabase and application-level permissions.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3"/></svg>
+          </div>
+          <h3>Data modeling</h3>
+          <p>PostgreSQL schemas via Prisma ORM for users, companies, products, orders, commissions, payouts and permissions.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2c0-1 1.1-1.7 2.5-1.7s2.5.7 2.5 1.7c0 2.6-5 1.7-5 4.4 0 1 1.1 1.7 2.5 1.7s2.5-.7 2.5-1.7"/></svg>
+          </div>
+          <h3>Commissions &amp; payouts</h3>
+          <p>Commission calculation, payout management, supplier balances, unpaid-order and payout-history logic for marketplace operations.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          </div>
+          <h3>Deployment &amp; ops</h3>
+          <p>Deployed and maintained with Vercel, Supabase, Clerk, environment configuration and Git/GitHub workflows.</p>
+        </div>
+      </div>
+
+      <div class="zendo-stack reveal">
+        <span class="stack-label">Built with</span>
+        <div class="chips">
+          <span class="chip">Next.js 15</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span><span class="chip">Prisma ORM</span><span class="chip">Clerk</span><span class="chip">Supabase</span><span class="chip">Tailwind CSS</span><span class="chip">Vercel</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= PROJECTS ======================= -->
+    <section class="section" id="work">
+      <div class="section-head reveal">
+        <span class="section-tag">Selected work</span>
+        <h2>Every project, no filler<span class="accent-dot">.</span></h2>
+        <p class="section-lede">Client sites, platforms and experiments — all shipped, all live.</p>
+      </div>
+      <div class="projects-grid" id="projectsGrid"><!-- populated by script.js --></div>
+    </section>
+
+    <!-- ======================= ABOUT ======================= -->
+    <section class="section about" id="about">
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <span class="section-tag">About</span>
+          <h2>Engineer first,<br/>pixel-stubborn second<span class="accent-dot">.</span></h2>
+          <p>
+            I&rsquo;m Suhejb — a full-stack software engineer based between Preshevo (Serbia) and Skopje
+            (North Macedonia). I studied Computer Engineering at International Balkan University and have been
+            shipping real products for real clients ever since: construction companies, rehabilitation centers,
+            rental businesses, blogs, NFT projects — and my own marketplace, Zendo.
+          </p>
+          <p>
+            What I care about: systems that don&rsquo;t fall over, databases designed before the first component is
+            written, and interfaces that feel effortless. I speak Albanian natively, English fluently, and
+            fluent SQL under pressure.
+          </p>
+          <div class="about-meta">
+            <div class="meta-item">
+              <span class="meta-key">Location</span>
+              <span class="meta-val">Preshevo, RS &middot; Skopje, MK</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-key">Languages</span>
+              <span class="meta-val">Albanian &middot; English</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-key">Focus</span>
+              <span class="meta-val">E-commerce &middot; Dashboards &middot; APIs</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual reveal">
+          <div class="polaroid polaroid-1">
+            <div class="polaroid-img polaroid-code">
+              <svg viewBox="0 0 200 150" role="img" aria-label="Code editor illustration">
+                <rect width="200" height="150" rx="6" fill="#111311"/>
+                <circle cx="16" cy="14" r="4" fill="#ff5f57"/><circle cx="30" cy="14" r="4" fill="#febc2e"/><circle cx="44" cy="14" r="4" fill="#28c840"/>
+                <rect x="16" y="34" width="70" height="7" rx="3.5" fill="#baf7c4"/>
+                <rect x="30" y="50" width="110" height="7" rx="3.5" fill="#3f453f"/>
+                <rect x="30" y="66" width="90" height="7" rx="3.5" fill="#5a615a"/>
+                <rect x="30" y="82" width="120" height="7" rx="3.5" fill="#3f453f"/>
+                <rect x="16" y="98" width="50" height="7" rx="3.5" fill="#baf7c4"/>
+                <rect x="30" y="114" width="100" height="7" rx="3.5" fill="#3f453f"/>
+              </svg>
+            </div>
+            <span class="polaroid-caption">prisma migrate deploy ✓</span>
+          </div>
+          <div class="polaroid polaroid-2">
+            <div class="polaroid-img polaroid-map">
+              <svg viewBox="0 0 200 150" role="img" aria-label="Map illustration of the Balkans">
+                <rect width="200" height="150" rx="6" fill="#eef2ec"/>
+                <path d="M30 110 C50 70, 80 95, 100 60 C115 35, 150 50, 170 30" fill="none" stroke="#c9cdc7" stroke-width="2" stroke-dasharray="5 5"/>
+                <circle cx="100" cy="60" r="7" fill="#111311"/>
+                <circle cx="100" cy="60" r="13" fill="none" stroke="#7ed957" stroke-width="2"/>
+                <rect x="82" y="80" width="40" height="12" rx="6" fill="#111311"/>
+                <rect x="88" y="84" width="28" height="4" rx="2" fill="#baf7c4"/>
+                <circle cx="170" cy="30" r="5" fill="#7ed957"/>
+                <circle cx="30" cy="110" r="5" fill="#c9cdc7"/>
+              </svg>
+            </div>
+            <span class="polaroid-caption">Preshevo ⇄ Skopje</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= EXPERIENCE ======================= -->
+    <section class="section" id="experience">
+      <div class="section-head reveal">
+        <span class="section-tag">Experience &amp; education</span>
+        <h2>The road so far<span class="accent-dot">.</span></h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row reveal">
+          <span class="timeline-when">2024 — Present</span>
+          <div class="timeline-what">
+            <h3>Full-Stack Developer <span class="timeline-at">— Zendo.mk</span></h3>
+            <p>Built and launched a production multi-vendor marketplace: storefront, RBAC dashboards, commission &amp; payout engine, PostgreSQL/Prisma data layer, deployed on Vercel + Supabase.</p>
+          </div>
+        </div>
+        <div class="timeline-row reveal">
+          <span class="timeline-when">2022 — Present</span>
+          <div class="timeline-what">
+            <h3>Freelance Web Developer <span class="timeline-at">— Client projects</span></h3>
+            <p>Designed and delivered websites and platforms for clients across construction, healthcare, rentals, publishing and Web3 — Keramika DOO, QendraERA, Saqipi Construction, Bi Rent, Shkdituria, PandaMind.</p>
+          </div>
+        </div>
+        <div class="timeline-row reveal">
+          <span class="timeline-when">2021 — 2026</span>
+          <div class="timeline-what">
+            <h3>B.Sc. Computer Engineering <span class="timeline-at">— International Balkan University, Skopje</span></h3>
+            <p>Graduate. Foundations in software engineering, databases, algorithms and systems.</p>
+          </div>
+        </div>
+        <div class="timeline-row reveal">
+          <span class="timeline-when">2023</span>
+          <div class="timeline-what">
+            <h3>Full-Stack Web Developer Program <span class="timeline-at">— PERPROGRAMERA</span></h3>
+            <p>6-month intensive program, completed September 2023.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= SERVICES ======================= -->
+    <section class="section services">
+      <div class="section-head reveal">
+        <span class="section-tag">How can I help</span>
+        <h2>Let&rsquo;s turn your idea into something shipping<span class="accent-dot">.</span></h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>
+          </div>
+          <h3>Full-Stack Development</h3>
+          <p>Complete web applications — Next.js frontends, Node.js/Express APIs, PostgreSQL databases, all the way to production.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.5 12h10L20 8H6.6"/></svg>
+          </div>
+          <h3>E-Commerce Platforms</h3>
+          <p>Marketplaces, storefronts, carts, checkouts, order tracking, commissions and payouts — proven live on Zendo.mk.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="2"/><rect x="3" y="15" width="18" height="5" rx="2"/><circle cx="7" cy="6.5" r="0.8" fill="currentColor"/><circle cx="7" cy="17.5" r="0.8" fill="currentColor"/></svg>
+          </div>
+          <h3>APIs &amp; Database Design</h3>
+          <p>REST APIs, JWT auth, RBAC, and PostgreSQL schemas designed with Prisma — built to scale past the demo.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c-1.5 4-5 5.5-8 6 3 .5 6.5 2 8 6 1.5-4 5-5.5 8-6-3-.5-6.5-2-8-6z"/><path d="M19 15c-.6 1.6-2 2.4-3.5 2.6 1.5.2 2.9 1 3.5 2.6.6-1.6 2-2.4 3.5-2.6-1.5-.2-2.9-1-3.5-2.6z" transform="scale(0.85) translate(1 1)"/></svg>
+          </div>
+          <h3>Animated Interfaces</h3>
+          <p>Scroll-driven animations, 3D scenes and micro-interactions with GSAP, Three.js and Framer Motion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CONTACT ======================= -->
+    <section class="section contact" id="contact">
+      <div class="contact-card reveal">
+        <div class="contact-copy">
+          <span class="section-tag section-tag-invert">Get in touch</span>
+          <h2>Have a project?<br/>Let&rsquo;s build it<span class="accent-dot">.</span></h2>
+          <p>I&rsquo;m open to new projects, collaborations and interesting problems. Email me directly or use the form — I usually reply within a day.</p>
+          <div class="contact-lines">
+            <a href="mailto:suhejbmusliu69@gmail.com" class="contact-line">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+              suhejbmusliu69@gmail.com
+            </a>
+            <a href="tel:+38970950998" class="contact-line">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+              +389 70 950 998
+            </a>
+            <a href="https://www.linkedin.com/in/suhejb-musliu-8875691a8" target="_blank" rel="noopener" class="contact-line">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+              linkedin.com/in/suhejb-musliu
+            </a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Full name" required aria-label="Full name" />
+            <input type="email" name="email" placeholder="Email address" required aria-label="Email address" />
+          </div>
+          <textarea name="message" rows="5" placeholder="Tell me about your project…" required aria-label="Message"></textarea>
+          <button type="submit" class="btn btn-light">Send message
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="footer">
+      <span>© 2026 Suhejb Musliu. Built with plain HTML, CSS &amp; caffeine.</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/suhejb-musliu-8875691a8" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:suhejbmusliu69@gmail.com">Email</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="admin-demo.js"></script>
+</body>
+</html>
