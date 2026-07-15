@@ -292,8 +292,8 @@ const PROJECTS = [
     type: "Corporate website",
     desc: "Marketing site for a ceramic tile studio in three languages (Albanian, English, Serbian) — gallery, materials showcase, project portfolio, testimonials, FAQ and a quote-request form, all with smooth scroll animations.",
     tech: ["React", "TypeScript", "Framer Motion", "i18n"],
-    url: "https://www.keramikadoo.net",
-    label: "keramikadoo.net",
+    url: "https://keramika-vert.vercel.app",
+    label: "keramika-vert.vercel.app",
   },
   {
     id: "qendraera",
@@ -333,13 +333,21 @@ const PROJECTS = [
   },
 ];
 
+/* ---- real screenshot with SVG-mockup fallback ---- */
+/* Default image is assets/<id>.png. A project can override it by adding
+   an `img: "assets/whatever.jpg"` field. If the file is missing or broken,
+   the hand-drawn SVG mockup takes over automatically. */
+const shot = (id, name, img) =>
+  `<img src="${img || `assets/${id}.png`}" alt="${name} — live site screenshot" loading="lazy"
+        onerror="this.closest('.device-screen, .project-shot').innerHTML = MOCKUPS['${id}']">`;
+
 /* ---- projects grid ---- */
 const grid = document.getElementById("projectsGrid");
 if (grid) {
   const cards = PROJECTS.map(
     (p) => `
     <article class="project-card reveal">
-      <div class="project-shot">${MOCKUPS[p.id]}</div>
+      <div class="project-shot">${shot(p.id, p.name, p.img)}</div>
       <div class="project-head">
         <h3>${p.name}</h3>
         <span class="project-type">${p.type}</span>
@@ -368,7 +376,7 @@ if (grid) {
 /* ---- showcase strip (all projects incl. Zendo) ---- */
 const SHOWCASE_ORDER = [
   { id: "zendo", name: "Zendo.mk", href: "#zendo", ext: false },
-  ...PROJECTS.map((p) => ({ id: p.id, name: p.name, href: p.url, ext: true })),
+  ...PROJECTS.map((p) => ({ id: p.id, name: p.name, href: p.url, ext: true, img: p.img })),
 ];
 
 const showcaseTrack = document.getElementById("showcaseTrack");
@@ -377,9 +385,9 @@ if (showcaseTrack) {
     (s) => `
     <a class="showcase-item" href="${s.href}" ${s.ext ? 'target="_blank" rel="noopener"' : ""}>
       <div class="device-frame">
-        <div class="device-screen">${MOCKUPS[s.id]}</div>
+        <div class="device-screen">${shot(s.id, s.name, s.img)}</div>
       </div>
-      <span class="showcase-label">${s.name}<span class="go">${s.ext ? "visit ↗" : "case study ↓"}</span></span>
+      <span class="showcase-label">${s.name}<span class="go">${s.ext ? "visit ↗" : "founder · my product ↓"}</span></span>
     </a>`
   ).join("");
   showcaseTrack.innerHTML = items + items; /* duplicated for seamless loop */

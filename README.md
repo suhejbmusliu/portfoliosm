@@ -50,8 +50,14 @@ Or drag the folder into vercel.com/new — it deploys as-is (static).
 ## Personalize
 
 1. **Photo** — replace the `SM` monogram in `.avatar-core` (index.html) with an `<img>` of yourself.
-2. **Real screenshots** — the project previews are hand-drawn SVG mockups in `script.js` (`MOCKUPS`).
-   To use real screenshots, replace `MOCKUPS[p.id]` in the card template with `<img src="assets/zendo.png">` etc.
+2. **Project screenshots** — live in `assets/<id>.png` where `<id>` is one of:
+   `zendo, nexon, shkdituria, saqipi, keramika, qendraera, birent, pandamind`.
+   Overwrite any of them with your own screenshot (keep the same filename; ~1280px wide,
+   16:10-ish, top of the page). If a file is missing or broken, the card automatically
+   falls back to the hand-drawn SVG mockup — nothing breaks.
 3. **GitHub link** — add your GitHub profile URL to the nav icons and footer (currently only LinkedIn + email).
 4. **Experience dates** — the timeline dates in `index.html` (`#experience`) are estimates; adjust to the real ones.
 5. **Contact form** — currently composes an email via `mailto:`. For a real form, swap in Formspree or a serverless function.
+
+Note: the current `assets/zendo.png` was captured with the site's promo popup and cookie
+banner open — replace it with a clean screenshot when you take yours.

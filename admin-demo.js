@@ -91,6 +91,7 @@
     vendors: '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 9 5.5 4h13L20 9M4 9v10h16V9M4 9h16M10 19v-6h4v6"/></svg>',
     payouts: '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>',
     access: '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9.5 12 2 2 3.5-4"/></svg>',
+    about: '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r="0.5" fill="currentColor"/></svg>',
   };
 
   const NAV = [
@@ -99,6 +100,7 @@
     { id: "vendors", label: "Vendors", vendor: false },
     { id: "payouts", label: "Payouts", vendor: true },
     { id: "access", label: "Access & roles", vendor: false },
+    { id: "about", label: "About Zendo", vendor: true },
   ];
 
   function renderSide() {
@@ -127,6 +129,7 @@
     vendors: "Vendors & balances",
     payouts: "Payout management",
     access: "Access & roles",
+    about: "About Zendo",
   };
 
   function renderTopbar() {
@@ -360,7 +363,39 @@
         the sidebar locks down and every table re-scopes to that company's data.</p>`;
   }
 
-  const PAGES = { overview: pageOverview, orders: pageOrders, vendors: pageVendors, payouts: pagePayouts, access: pageAccess };
+  function pageAbout() {
+    return `
+      <ol class="flow-steps">
+        <li><span class="step-n">1</span><b>Vendor onboarding</b>Local shops register as vendor companies, each with its own catalog, team and commission rate.</li>
+        <li><span class="step-n">2</span><b>One storefront</b>All vendors sell through a single zendo.mk storefront — shared cart, unified checkout, delivery across North Macedonia.</li>
+        <li><span class="step-n">3</span><b>Orders & fulfillment</b>Orders route to the right vendor automatically. Vendors process and ship from their own dashboard.</li>
+        <li><span class="step-n">4</span><b>Commissions & payouts</b>The platform keeps its commission per order and pays vendors their balance — every denar tracked in payout history.</li>
+      </ol>
+      <div class="payout-grid">
+        <div class="payout-card">
+          <h5>Customer storefront</h5>
+          <p class="module-desc">Product catalog with categories and search, cart, checkout and order tracking — localized for the Macedonian market.</p>
+        </div>
+        <div class="payout-card">
+          <h5>Vendor dashboard</h5>
+          <p class="module-desc">Each vendor company manages its own products, stock, orders, workflows and reports — and sees nothing of other vendors.</p>
+        </div>
+        <div class="payout-card">
+          <h5>Admin console</h5>
+          <p class="module-desc">Platform administration: vendors, users, permissions, commission configuration, payout runs and marketplace-wide reporting.</p>
+        </div>
+        <div class="payout-card">
+          <h5>Financial engine</h5>
+          <p class="module-desc">Per-order commission calculation, supplier balances, unpaid-order tracking and full payout history — the hardest and most valuable part of the build.</p>
+        </div>
+      </div>
+      <p class="section-note">Architecture: Next.js 15 on Vercel · Clerk authentication with RBAC ·
+        Supabase PostgreSQL with Prisma ORM (users, companies, products, orders, commissions, payouts,
+        permissions) · Tailwind CSS. Founded, built and operated by Suhejb Musliu.</p>
+      <p class="section-note">All numbers in this demo are simulated — real business data stays private.</p>`;
+  }
+
+  const PAGES = { overview: pageOverview, orders: pageOrders, vendors: pageVendors, payouts: pagePayouts, access: pageAccess, about: pageAbout };
 
   /* ---------------- KPI count-up ---------------- */
   const kpiPrev = {};
