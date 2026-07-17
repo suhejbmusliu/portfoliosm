@@ -394,6 +394,115 @@ if (showcaseTrack) {
 }
 
 /* ------------------------------------------------------------
+   3.5 SKILLS — categorized grid with animated proficiency bars
+   ------------------------------------------------------------ */
+const gOf = (name) => (TECH.find((t) => t.name === name) || {}).g;
+
+const SKILLS = [
+  {
+    title: "Languages & Markup",
+    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>`,
+    items: [
+      { name: "HTML5", level: 95, g: glyph("#e34f26", txt("H5", "#fff")) },
+      { name: "CSS3", level: 92, g: glyph("#264de4", txt("CSS", "#fff", 9)) },
+      { name: "JavaScript", level: 90, g: gOf("JavaScript") },
+      { name: "TypeScript", level: 88, g: gOf("TypeScript") },
+      { name: "SQL", level: 84, g: glyph("#0b7285", txt("SQL", "#fff", 9)) },
+    ],
+  },
+  {
+    title: "Frameworks & Libraries",
+    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2.5"/><path d="M3 9h18M8 4v5"/></svg>`,
+    items: [
+      { name: "React", level: 90, g: gOf("React") },
+      { name: "Next.js", level: 92, g: gOf("Next.js") },
+      { name: "Tailwind CSS", level: 90, g: gOf("Tailwind CSS") },
+      { name: "Node.js", level: 85, g: gOf("Node.js") },
+      { name: "Express", level: 84, g: gOf("Express") },
+    ],
+  },
+  {
+    title: "Databases & Auth",
+    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3"/></svg>`,
+    items: [
+      { name: "PostgreSQL", level: 85, g: gOf("PostgreSQL") },
+      { name: "Prisma ORM", level: 88, g: gOf("Prisma") },
+      { name: "Supabase", level: 82, g: gOf("Supabase") },
+      { name: "REST APIs", level: 88, g: gOf("REST APIs") },
+      { name: "Clerk · Auth & RBAC", level: 82, g: gOf("Clerk") },
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 6.5a4.5 4.5 0 0 0-6.1 5.9L3 17.8V21h3.2l5.4-5.4a4.5 4.5 0 0 0 5.9-6.1l-2.8 2.8-2.5-.5-.5-2.5 2.8-2.8z"/></svg>`,
+    items: [
+      { name: "Git & GitHub", level: 90, g: gOf("Git") },
+      { name: "Vercel", level: 90, g: gOf("Vercel") },
+      { name: "Postman", level: 85, g: gOf("Postman") },
+      { name: "Figma", level: 78, g: gOf("Figma") },
+      { name: "Docker", level: 72, g: gOf("Docker") },
+    ],
+  },
+];
+
+const skillsGrid = document.getElementById("skillsGrid");
+if (skillsGrid) {
+  skillsGrid.innerHTML = SKILLS.map(
+    (cat) => `
+    <div class="skill-card reveal">
+      <div class="skill-card-head">
+        <span class="skill-card-icon">${cat.icon}</span>
+        <h3>${cat.title}</h3>
+        <span class="skill-count">${cat.items.length} skills</span>
+      </div>
+      ${cat.items.map(
+        (s, i) => `
+        <div class="skill-row">
+          ${s.g}
+          <div class="skill-info">
+            <div class="skill-top">
+              <span class="skill-name">${s.name}</span>
+              <span class="skill-pct" data-target="${s.level}">0%</span>
+            </div>
+            <div class="skill-bar"><span class="skill-bar-fill" style="--level:${s.level}%;--bar-delay:${i * 90}ms"></span></div>
+          </div>
+        </div>`
+      ).join("")}
+    </div>`
+  ).join("");
+
+  /* percentage count-up, synced with the CSS bar fill */
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const countUp = (el, target, delay) => {
+    if (reducedMotion) { el.textContent = `${target}%`; return; }
+    const dur = 1100;
+    const start = performance.now() + delay;
+    const step = (now) => {
+      const t = Math.min(Math.max((now - start) / dur, 0), 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = `${Math.round(eased * target)}%`;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const pctIO = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll(".skill-pct").forEach((el, i) =>
+          countUp(el, +el.dataset.target, i * 90)
+        );
+        pctIO.unobserve(e.target);
+      });
+    },
+    { threshold: 0.3 }
+  );
+  skillsGrid.querySelectorAll(".skill-card").forEach((c) => pctIO.observe(c));
+}
+
+/* ------------------------------------------------------------
    4. SCROLL REVEAL — IntersectionObserver with sibling stagger
    ------------------------------------------------------------ */
 function initReveal() {
