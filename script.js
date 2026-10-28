@@ -333,185 +333,51 @@ const PROJECTS = [
   },
 ];
 
-/* ---- real screenshot with SVG-mockup fallback ---- */
-/* Default image is assets/<id>.png. A project can override it by adding
-   an `img: "assets/whatever.jpg"` field. If the file is missing or broken,
+/* ------------------------------------------------------------
+   4. PROJECT LIST — CV-style entries
+   ------------------------------------------------------------ */
+/* Default image is assets/<id>.png. A project can override it with an
+   `img: "assets/whatever.jpg"` field. If the file is missing or broken,
    the hand-drawn SVG mockup takes over automatically. */
 const shot = (id, name, img) =>
-  `<img src="${img || `assets/${id}.png`}" alt="${name} — live site screenshot" loading="lazy"
-        onerror="this.closest('.device-screen, .project-shot').innerHTML = MOCKUPS['${id}']">`;
+  `<img src="${img || `assets/${id}.png`}" alt="${name} — screenshot" loading="lazy"
+        onerror="this.closest('[data-shot]').innerHTML = MOCKUPS['${id}']">`;
 
-/* ---- projects grid ---- */
-const grid = document.getElementById("projectsGrid");
-if (grid) {
-  const cards = PROJECTS.map(
+const projectList = document.getElementById("projectsGrid");
+if (projectList) {
+  projectList.innerHTML = PROJECTS.map(
     (p) => `
-    <article class="project-card reveal">
-      <div class="project-shot">${shot(p.id, p.name, p.img)}</div>
-      <div class="project-head">
-        <h3>${p.name}</h3>
-        <span class="project-type">${p.type}</span>
-      </div>
-      <p>${p.desc}</p>
-      <div class="project-foot">
-        <div class="chips">${p.tech.map((t) => `<span class="chip">${t}</span>`).join("")}</div>
-        <a class="project-link" href="${p.url}" target="_blank" rel="noopener">${p.label}
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
+    <article class="proj-item reveal">
+      <a class="proj-thumb" data-shot href="${p.url}" target="_blank" rel="noopener" aria-label="Open ${p.name}">
+        ${shot(p.id, p.name, p.img)}
+      </a>
+      <div class="proj-info">
+        <div class="cv-entry-head">
+          <h3>${p.name}</h3>
+          <span class="cv-date">${p.type}</span>
+        </div>
+        <p>${p.desc}</p>
+        <div class="proj-meta">
+          <div class="chips">${p.tech.map((t) => `<span class="chip">${t}</span>`).join("")}</div>
+          <a class="project-link" href="${p.url}" target="_blank" rel="noopener">${p.label}
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
       </div>
     </article>`
   ).join("");
-
-  const ctaCard = `
-    <article class="project-card reveal" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:var(--ink);border-color:var(--ink);min-height:320px;padding:36px;">
-      <span class="section-tag section-tag-invert">Next project</span>
-      <h3 style="color:#fff;font-size:26px;margin-top:16px;line-height:1.25;">This spot is reserved<br/>for your idea<span class="accent-dot">.</span></h3>
-      <p style="color:#b8bcb2;margin:14px 0 22px 0;font-size:14.5px;">Marketplace, dashboard, landing page or something nobody has built yet — let's talk about it.</p>
-      <a href="mailto:suhejbmusliu69@gmail.com?subject=Project%20inquiry" class="btn btn-light">Start a project</a>
-    </article>`;
-
-  grid.innerHTML = cards + ctaCard;
-}
-
-/* ---- showcase strip (all projects incl. Zendo) ---- */
-const SHOWCASE_ORDER = [
-  { id: "zendo", name: "Zendo.mk", href: "#zendo", ext: false },
-  ...PROJECTS.map((p) => ({ id: p.id, name: p.name, href: p.url, ext: true, img: p.img })),
-];
-
-const showcaseTrack = document.getElementById("showcaseTrack");
-if (showcaseTrack) {
-  const items = SHOWCASE_ORDER.map(
-    (s) => `
-    <a class="showcase-item" href="${s.href}" ${s.ext ? 'target="_blank" rel="noopener"' : ""}>
-      <div class="device-frame">
-        <div class="device-screen">${shot(s.id, s.name, s.img)}</div>
-      </div>
-      <span class="showcase-label">${s.name}<span class="go">${s.ext ? "visit ↗" : "founder · my product ↓"}</span></span>
-    </a>`
-  ).join("");
-  showcaseTrack.innerHTML = items + items; /* duplicated for seamless loop */
 }
 
 /* ------------------------------------------------------------
-   3.5 SKILLS — categorized grid with animated proficiency bars
+   5. SCROLL REVEAL — IntersectionObserver with sibling stagger
    ------------------------------------------------------------ */
-const gOf = (name) => (TECH.find((t) => t.name === name) || {}).g;
-
-const SKILLS = [
-  {
-    title: "Languages & Markup",
-    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>`,
-    items: [
-      { name: "HTML5", level: 95, g: glyph("#e34f26", txt("H5", "#fff")) },
-      { name: "CSS3", level: 92, g: glyph("#264de4", txt("CSS", "#fff", 9)) },
-      { name: "JavaScript", level: 90, g: gOf("JavaScript") },
-      { name: "TypeScript", level: 88, g: gOf("TypeScript") },
-      { name: "SQL", level: 84, g: glyph("#0b7285", txt("SQL", "#fff", 9)) },
-    ],
-  },
-  {
-    title: "Frameworks & Libraries",
-    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2.5"/><path d="M3 9h18M8 4v5"/></svg>`,
-    items: [
-      { name: "React", level: 90, g: gOf("React") },
-      { name: "Next.js", level: 92, g: gOf("Next.js") },
-      { name: "Tailwind CSS", level: 90, g: gOf("Tailwind CSS") },
-      { name: "Node.js", level: 85, g: gOf("Node.js") },
-      { name: "Express", level: 84, g: gOf("Express") },
-    ],
-  },
-  {
-    title: "Databases & Auth",
-    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3"/></svg>`,
-    items: [
-      { name: "PostgreSQL", level: 85, g: gOf("PostgreSQL") },
-      { name: "Prisma ORM", level: 88, g: gOf("Prisma") },
-      { name: "Supabase", level: 82, g: gOf("Supabase") },
-      { name: "REST APIs", level: 88, g: gOf("REST APIs") },
-      { name: "Clerk · Auth & RBAC", level: 82, g: gOf("Clerk") },
-    ],
-  },
-  {
-    title: "Tools & Platforms",
-    icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 6.5a4.5 4.5 0 0 0-6.1 5.9L3 17.8V21h3.2l5.4-5.4a4.5 4.5 0 0 0 5.9-6.1l-2.8 2.8-2.5-.5-.5-2.5 2.8-2.8z"/></svg>`,
-    items: [
-      { name: "Git & GitHub", level: 90, g: gOf("Git") },
-      { name: "Vercel", level: 90, g: gOf("Vercel") },
-      { name: "Postman", level: 85, g: gOf("Postman") },
-      { name: "Figma", level: 78, g: gOf("Figma") },
-      { name: "Docker", level: 72, g: gOf("Docker") },
-    ],
-  },
-];
-
-const skillsGrid = document.getElementById("skillsGrid");
-if (skillsGrid) {
-  skillsGrid.innerHTML = SKILLS.map(
-    (cat) => `
-    <div class="skill-card reveal">
-      <div class="skill-card-head">
-        <span class="skill-card-icon">${cat.icon}</span>
-        <h3>${cat.title}</h3>
-        <span class="skill-count">${cat.items.length} skills</span>
-      </div>
-      ${cat.items.map(
-        (s, i) => `
-        <div class="skill-row">
-          ${s.g}
-          <div class="skill-info">
-            <div class="skill-top">
-              <span class="skill-name">${s.name}</span>
-              <span class="skill-pct" data-target="${s.level}">0%</span>
-            </div>
-            <div class="skill-bar"><span class="skill-bar-fill" style="--level:${s.level}%;--bar-delay:${i * 90}ms"></span></div>
-          </div>
-        </div>`
-      ).join("")}
-    </div>`
-  ).join("");
-
-  /* percentage count-up, synced with the CSS bar fill */
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const countUp = (el, target, delay) => {
-    if (reducedMotion) { el.textContent = `${target}%`; return; }
-    const dur = 1100;
-    const start = performance.now() + delay;
-    const step = (now) => {
-      const t = Math.min(Math.max((now - start) / dur, 0), 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = `${Math.round(eased * target)}%`;
-      if (t < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-
-  const pctIO = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        e.target.querySelectorAll(".skill-pct").forEach((el, i) =>
-          countUp(el, +el.dataset.target, i * 90)
-        );
-        pctIO.unobserve(e.target);
-      });
-    },
-    { threshold: 0.3 }
-  );
-  skillsGrid.querySelectorAll(".skill-card").forEach((c) => pctIO.observe(c));
-}
-
-/* ------------------------------------------------------------
-   4. SCROLL REVEAL — IntersectionObserver with sibling stagger
-   ------------------------------------------------------------ */
-function initReveal() {
+(() => {
   const els = document.querySelectorAll(".reveal");
   els.forEach((el) => {
-    const parent = el.parentElement;
-    const siblings = parent ? [...parent.children].filter((c) => c.classList.contains("reveal")) : [el];
-    const idx = siblings.indexOf(el);
-    el.style.setProperty("--reveal-delay", `${Math.min(idx, 6) * 80}ms`);
+    const siblings = el.parentElement
+      ? [...el.parentElement.children].filter((c) => c.classList.contains("reveal"))
+      : [el];
+    el.style.setProperty("--reveal-delay", `${Math.min(siblings.indexOf(el), 6) * 70}ms`);
   });
 
   const io = new IntersectionObserver(
@@ -523,25 +389,23 @@ function initReveal() {
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
   );
   els.forEach((el) => io.observe(el));
-}
-initReveal();
+})();
 
 /* ------------------------------------------------------------
-   5. SCROLL PROGRESS + NAV STATE
+   6. SCROLL PROGRESS + NAV STATE
    ------------------------------------------------------------ */
 const progressBar = document.getElementById("progressBar");
 const navWrap = document.getElementById("navWrap");
-
 let ticking = false;
+
 window.addEventListener("scroll", () => {
   if (ticking) return;
   ticking = true;
   requestAnimationFrame(() => {
-    const doc = document.documentElement;
-    const max = doc.scrollHeight - window.innerHeight;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
     if (progressBar) progressBar.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
     if (navWrap) navWrap.classList.toggle("scrolled", window.scrollY > 40);
     ticking = false;
@@ -549,28 +413,7 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 /* ------------------------------------------------------------
-   6. CONTACT FORM — composes an email (no backend needed)
+   7. SAVE AS PDF — prints the page with the print stylesheet
    ------------------------------------------------------------ */
-const form = document.getElementById("contactForm");
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const name = data.get("name") || "";
-    const email = data.get("email") || "";
-    const message = data.get("message") || "";
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
-    window.location.href = `mailto:suhejbmusliu69@gmail.com?subject=${subject}&body=${body}`;
-
-    const btn = form.querySelector("button[type=submit]");
-    if (btn) {
-      btn.classList.add("form-sent");
-      btn.textContent = "Opening your email app…";
-      setTimeout(() => {
-        btn.classList.remove("form-sent");
-        btn.innerHTML = `Send message <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h15M13 6l6 6-6 6"/></svg>`;
-      }, 4000);
-    }
-  });
-}
+const printBtn = document.getElementById("printCv");
+if (printBtn) printBtn.addEventListener("click", () => window.print());

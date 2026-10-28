@@ -391,7 +391,7 @@
       </div>
       <p class="section-note">Architecture: Next.js 15 on Vercel · Clerk authentication with RBAC ·
         Supabase PostgreSQL with Prisma ORM (users, companies, products, orders, commissions, payouts,
-        permissions) · Tailwind CSS. Founded, built and operated by Suhejb Musliu.</p>
+        permissions) · Tailwind CSS. Designed and built by Suhejb Musliu.</p>
       <p class="section-note">All numbers in this demo are simulated — real business data stays private.</p>`;
   }
 
