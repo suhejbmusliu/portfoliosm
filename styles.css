@@ -31,6 +31,12 @@
 /* the hidden attribute must always win, even over display rules like .admin-shell{display:flex} */
 [hidden] { display: none !important; }
 
+.print-only { display: none !important; }
+
+@media print {
+  .cv-contact .print-only { display: inline-flex !important; }
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -662,41 +668,82 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ============================================================
-   PRINT — "Save as PDF" produces a clean CV
+   PRINT — "Save as PDF" produces a compact A4 CV
    ============================================================ */
 @media print {
-  @page { margin: 14mm 14mm; }
-
-  body { font-size: 11.5px; line-height: 1.5; }
-
-  .nav-wrap, .progress-bar, .tech-marquee-section,
-  .zendo-demo, .proj-shot, .proj-thumb, .footer { display: none !important; }
-
-  .page { max-width: none; border: none; }
-
-  .reveal { opacity: 1 !important; transform: none !important; }
-
-  .cv-header { padding: 0 0 14px; }
-  .cv-photo { width: 84px; height: 84px; margin-bottom: 10px; }
-  .cv-header h1 { font-size: 28px; }
-  .cv-role { font-size: 14px; margin-top: 4px; }
-  .cv-contact { margin-top: 10px; font-size: 11px; }
-
-  .cv-row {
-    grid-template-columns: 120px minmax(0, 1fr);
-    gap: 18px;
-    padding: 14px 0;
+  @page {
+    size: A4;
+    margin: 12mm 13mm 14mm;
+    @bottom-left {
+      content: "Suhejb Musliu — Full-Stack Software Engineer";
+      font: 600 7.5px "Manrope", sans-serif;
+      color: #9a9e94;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font: 700 7.5px "Manrope", sans-serif;
+      color: #9a9e94;
+    }
   }
 
-  .cv-label { position: static; }
-  .cv-body > p, .cv-text, .cv-bullets, .challenge p,
-  .feature-list li, .proj-info p, .skill-groups dd { font-size: 11px; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10px; line-height: 1.45; }
 
-  .cv-entry + .cv-entry { margin-top: 12px; padding-top: 12px; }
-  .cv-sub { margin: 16px 0 8px; }
-  .challenge { padding: 8px 0; break-inside: avoid; }
-  .proj-item { grid-template-columns: 1fr; padding: 8px 0; break-inside: avoid; }
-  .cv-entry { break-inside: avoid; }
+  .nav-wrap, .progress-bar, .tech-marquee-section, .footer,
+  .proj-shot, .proj-thumb, .proj-meta .chips,
+  #zendo .feature-list, #zendo .proj-stack, .print-hide { display: none !important; }
 
+  .page { max-width: none; border: none; }
+  .reveal { opacity: 1 !important; transform: none !important; }
   a { text-decoration: none; }
+
+  /* header */
+  .cv-header { padding: 0 0 10px; }
+  .cv-photo { width: 70px; height: 70px; margin-bottom: 8px; }
+  .cv-header h1 { font-size: 26px; }
+  .cv-role { font-size: 10px; margin-top: 5px; }
+  .cv-contact { margin-top: 8px; gap: 3px 16px; font-size: 9.5px; }
+  .cv-contact svg { width: 11px; height: 11px; }
+
+  /* rows */
+  .cv-row { grid-template-columns: 100px minmax(0, 1fr); gap: 16px; padding: 8px 0; }
+  .cv-label { position: static; font-size: 8.5px; gap: 6px; padding-top: 2px; }
+  .cv-label::before { width: 6px; height: 6px; }
+
+  .cv-body > p, .cv-text, .cv-bullets, .challenge p, .proj-info p,
+  .skill-groups dd, .lang-list, .facts dd { font-size: 9.5px; }
+
+  .cv-entry { break-inside: avoid; }
+  .cv-entry + .cv-entry { margin-top: 9px; padding-top: 9px; }
+  .cv-entry-head h3 { font-size: 12.5px; }
+  .cv-date { font-size: 9px; }
+  .cv-org { font-size: 9.5px; margin-top: 1px; }
+  .cv-bullets { margin: 5px 0 0 13px; }
+  .cv-bullets li { margin-top: 1px; }
+
+  /* Zendo */
+  .proj-head h3 { font-size: 14px; }
+  .project-link { font-size: 9.5px; border-bottom-width: 1px; }
+  .cv-text { margin-top: 6px; }
+  .cv-sub { margin: 10px 0 6px; font-size: 8.5px; }
+  .facts > div { padding: 5px 9px; }
+  .facts dt { font-size: 7.5px; margin-bottom: 1px; }
+  .challenge { padding: 4px 0; row-gap: 0; column-gap: 10px; grid-template-columns: 26px minmax(0, 1fr); break-inside: avoid; }
+  .challenge h5 { font-size: 11px; }
+  .challenge-n { font-size: 8.5px; padding: 0 4px; }
+  .proj-stack { margin-top: 8px; padding-top: 6px; gap: 10px; }
+  .stack-label { font-size: 8px; }
+  .chip { font-size: 8.5px; padding: 1px 6px; }
+
+  /* other projects */
+  .proj-item { position: relative; grid-template-columns: 1fr; gap: 0; padding: 5px 0; break-inside: avoid; }
+  .proj-item:first-child .proj-meta { top: 0; }
+  .proj-info h3 { font-size: 11.5px; }
+  .proj-info .cv-date { display: none; }
+  .proj-info p { margin: 1px 0 0; }
+  .proj-meta { position: absolute; top: 5px; right: 0; }
+
+  /* skills */
+  .skill-groups > div { grid-template-columns: 115px minmax(0, 1fr); gap: 10px; padding: 3px 0; }
+  .skill-groups dt { font-size: 9.5px; }
 }
